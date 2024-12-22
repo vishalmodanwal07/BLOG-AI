@@ -1,34 +1,38 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+// Frontend: Home.jsx
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import BlogCard from '../components/BlogCard'; // Assuming the BlogCard component is in the same directory
-import Spinner from '../components/Spinner';
+import axios from 'axios';
+import BlogCard from "../components/BlogCard";
+
 
 function Home() {
   const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true); // Added loading state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get('/api/posts'); // Fetch the API response
-        const { data, success } = response.data; // Destructure data and success from the response
+        const response = await axios.get('/api/posts');
+        const { data, success } = response.data;
 
-        // Validate success and data array
         if (success && Array.isArray(data)) {
-          setPosts(data); // Set posts state with the data array
+          setPosts(data);
         } else {
           console.error('Expected data to be an array, but got:', response.data);
         }
       } catch (error) {
         console.error('Error fetching posts:', error);
       } finally {
-        setLoading(false); // Ensure loading state is updated
+        setLoading(false);
       }
     };
 
     fetchPosts();
   }, []);
+
+  const handleDeletePost = (deletedPostId) => {
+    setPosts((prevPosts) => prevPosts.filter((post) => post._id !== deletedPostId));
+  };
 
   return (
     <div className="flex flex-col items-center justify-start min-h-screen bg-gradient-to-r from-blue-100 to-purple-100">
@@ -36,7 +40,7 @@ function Home() {
         <h1 className="text-4xl font-extrabold text-center text-blue-700 mb-8">Blog Posts</h1>
 
         {loading ? (
-          <Spinner />
+          <p>Loading...</p>
         ) : posts.length === 0 ? (
           <p className="text-gray-500 text-lg text-center">No posts available.</p>
         ) : (
@@ -44,9 +48,11 @@ function Home() {
             {posts.map((post) => (
               <BlogCard
                 key={post._id}
+                postId={post._id}
                 title={post.title}
                 content={post.content}
                 summary={post.summary}
+                onDelete={handleDeletePost} // Pass the callback
               />
             ))}
           </div>

@@ -1,23 +1,24 @@
+// Frontend: BlogCard.jsx
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const BlogCard = ({ title, content, summary, postId }) => {
+const BlogCard = ({ title, content, summary, postId, onDelete }) => {
   const navigate = useNavigate();
 
-  // Handle edit post
+  // Handle Edit Post
   const handleEdit = () => {
-    navigate(`/edit/${postId}`); // Navigate to the edit page with the post ID
+    navigate(`/edit/${postId}`); // Navigate to the edit page with postId
   };
 
-  // Handle delete post
+  // Handle Delete Post
   const handleDelete = async () => {
     const confirmDelete = window.confirm('Are you sure you want to delete this post?');
     if (confirmDelete) {
       try {
-        await axios.delete(`/api/posts/${postId}`); // Call the API to delete the post
+        await axios.delete(`/api/posts/${postId}`);
         alert('Post deleted successfully!');
-        window.location.reload(); // Refresh the page after deletion
+        onDelete(postId); // Call the callback function to update parent state
       } catch (error) {
         console.error('Error deleting the post:', error);
         alert('Failed to delete the post. Please try again.');
@@ -25,9 +26,9 @@ const BlogCard = ({ title, content, summary, postId }) => {
     }
   };
 
-  // Handle read more
+  // Handle Read More
   const handleReadMore = () => {
-    navigate(`/post/${postId}`); // Navigate to the blog post page
+    navigate(`/post/${postId}`);
   };
 
   return (
