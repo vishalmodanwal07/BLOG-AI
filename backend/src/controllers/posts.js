@@ -55,34 +55,34 @@ return res
 
 //4. for delete post-->
 
-const deletePost = asyncHandler(async(req , res)=>{
-    const {id} = req.params;
-    if(!mangoose.Types.ObjectId.isValid(id)){
-        return res.status(400).json({ error: 'Invalid post ID' });
+const deletePost = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  try {
+    const post = await Post.findByIdAndDelete(id);
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found' });
     }
-    try {
-        await Post.findByIdAndRemove(id);
-        return res
-        .status(200)
-        .json(
-            new ApiResponse(200 , "Post deleted successfully.")
-        )
-    } catch (error) {
-        throw new ApiError(409 , error?.message || "failed to delete post")
-    }
+    res.status(200).json({ message: 'Post deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting post:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
 });
+  
 
 const getPost = asyncHandler(async(req , res)=>{
-    const {id} = req.params;
-    try {
-        const post = await Post.findById(id);
-        return res
-        .status(200)
-        .json(new ApiResponse(200 , post))
-    } catch (error) {
-        throw new ApiError(404 , error?.message || "failed to access post")
+  const { id } = req.params;
+  try {
+    const post = await Post.findById(id);
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found' });
     }
-})
+    res.status(200).json(post);
+  } catch (error) {
+    console.error('Error fetching post:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
 
 
 export {
