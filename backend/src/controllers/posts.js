@@ -1,4 +1,4 @@
-import Post from "../models/post";
+import Post from "../models/post.js";
 import { generateSummary } from "../utils/ai.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/apiError.js";
@@ -57,6 +57,9 @@ return res
 
 const deletePost = asyncHandler(async(req , res)=>{
     const {id} = req.params;
+    if(!mangoose.Types.ObjectId.isValid(id)){
+        return res.status(400).json({ error: 'Invalid post ID' });
+    }
     try {
         await Post.findByIdAndRemove(id);
         return res
@@ -69,9 +72,23 @@ const deletePost = asyncHandler(async(req , res)=>{
     }
 });
 
+const getPost = asyncHandler(async(req , res)=>{
+    const {id} = req.params;
+    try {
+        const post = await Post.findById(id);
+        return res
+        .status(200)
+        .json(new ApiResponse(200 , post))
+    } catch (error) {
+        throw new ApiError(404 , error?.message || "failed to access post")
+    }
+})
+
+
 export {
     getPosts,
     createPost,
     updatePost,
-    deletePost
+    deletePost, 
+    getPost
 }

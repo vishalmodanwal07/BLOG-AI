@@ -1,17 +1,25 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import {Route , Routes} from "react-router-dom"
 import './App.css'
+import PostPage from "./pages/PostPage"
+import CreatePage from "./pages/CreatePage"
+import EditPage from "./pages/EditPage"
+import Home from "./pages/Home"
+import Layout from "./pages/Layout"
 
 function App() {
   
 
   return (
-    <>
-       <h1 className="text-3xl font-bold underline bg-red-400">
-      Hello world!
-    </h1>
-    </>
+    
+    <Routes>
+    <Route path="/" element={<Layout />}>
+      <Route index element={<Home />} />
+      <Route path="create" element={<CreatePage />} />
+      <Route path="edit/:id" element={<EditPage />} />
+      <Route path="post/:id" element={<PostPage />} />
+      
+    </Route>
+   </Routes>
   )
 }
 

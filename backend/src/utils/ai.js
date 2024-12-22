@@ -1,22 +1,32 @@
-import { Configuration, OpenAIApi } from "openai";
+import { OpenAI } from 'openai'; 
 
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY, // Ensure you have the API key in your environment variables
 });
 
-const openai = new OpenAIApi(configuration);
-
-export const generateSummary = async (content) => {
+/**
+ * 
+ * @param {string} content 
+ * @returns {string}
+ */
+const generateSummary = async (content) => {
   try {
-    const response = await openai.createCompletion({
-      model: "text-davinci-003",
-      prompt: `Provide a concise summary for the following blog content:\n\n${content}`,
-      max_tokens: 50,
+    if (!content || content.trim().length === 0) {
+      throw new Error("Content cannot be empty.");
+    }
+
+    
+    const response = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo", 
+      messages: [{ role: "user", content: `Please summarize the following text:\n\n${content}` }],
     });
 
-    return response.data.choices[0].text.trim();
+    return response.choices[0].message.content.trim();
   } catch (error) {
-    console.error("Error generating summary:", error.message);
-    return "Summary generation failed.";
+    console.error("Error generating summary:", error);
+    return "Failed to generate summary. Please try again later.";
   }
 };
+
+export { generateSummary };
