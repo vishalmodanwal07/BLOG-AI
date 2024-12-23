@@ -35,9 +35,11 @@ const BlogCard = ({ title, content, summary, postId, onDelete }) => {
   return (
     <div className="max-w-sm rounded-lg shadow-lg overflow-hidden bg-white transition-transform transform hover:scale-105 hover:shadow-2xl shadow-blue-500/20 ">
       <div className="p-6">
-        <h3 className="text-2xl font-semibold text-gray-800 mb-4">{title}</h3>
-        <p className="text-gray-600 text-base mb-4">{summary}</p>
-        <p className="text-gray-500 text-sm">
+        <h3 className="text-2xl font-semibold text-gray-700 mb-4 text-center"> <span className='font-semibold text-2xl text-black'>Title :</span>  {title}</h3>
+        <p className="text-black text-base mb-4 text-center "><span className='font-semibold  text-2xl text-yellow-400'>Summary</span>
+        <br/> "{summary}"
+         </p>
+        <p className="text-black text-sm text-center "><span className='font-semibold text-2xl text-yellow-400'>Content</span> <br/>
           {content.length > 150 ? content.substring(0, 150) + '...' : content}
         </p>
         <div className="flex justify-between mt-4">
@@ -56,7 +58,7 @@ const BlogCard = ({ title, content, summary, postId, onDelete }) => {
         </div>
         <button
           onClick={handleReadMore}
-          className="mt-4 px-6 py-2 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600 transition duration-300"
+          className="mt-4 px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600 transition duration-300"
         >
           Read More
         </button>

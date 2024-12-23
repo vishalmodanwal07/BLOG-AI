@@ -7,7 +7,7 @@ function Hero() {
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">
           Summarize Articles with{' '}
           <br className="hidden md:inline" />
-          <span className="text-yellow-400">Blog-Ai</span>
+          <span className="text-yellow-400 animate-bounce">Blog-Ai</span>
         </h1>
         <h2 className="mt-6 text-xl sm:text-2xl md:text-3xl font-medium opacity-90">
           Welcome to Blog-Ai! Explore insightful articles, stay updated with the latest trends, and create your own blog posts effortlessly.

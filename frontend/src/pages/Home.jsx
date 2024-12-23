@@ -41,8 +41,8 @@ function Home() {
 
   return (
     <div className="flex flex-col items-center justify-start min-h-screen bg-gradient-to-r from-blue-100 to-purple-100">
-      <div className="w-full bg-white p-8 rounded-xl shadow-2xl mb-8 max-w-full lg:max-w-7xl mx-auto">
-        <h1 className="text-4xl font-extrabold text-center text-blue-700 mb-8">Blog Posts</h1>
+      <div className="w-full bg-white p-8 rounded-xl shadow-2xl mb-8 max-w-full lg:max-w-7xl mx-auto min-h-screen">
+        <h1 className="text-4xl font-extrabold text-center text-blue-700 mb-8 animate-pulse">Blog Posts</h1>
 
         {loading ? (
           <Spinner/>
