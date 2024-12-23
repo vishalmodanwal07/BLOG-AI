@@ -19,39 +19,45 @@ const getPosts = asyncHandler(async(req , res)=> {
 
 //2. for create post
 
-const createPost = asyncHandler(async(req, res)=>{
-    const {title , content} = req.body;
-    try {
-        const summary =await generateSummary(content);
-        const newPost =await Post.create({title , content , summary});
-        return res
-        .status(201)
-        .json(new ApiResponse(200 , newPost , "new Post created" ))
-
-    } catch (error) {
-        throw new ApiError(409, error?.message || "failed to create post")   
+const createPost = asyncHandler(async (req, res) => {
+  const { title, content } = req.body;
+  try {
+    const summary = await generateSummary(content);
+    if (!summary) {
+      throw new ApiError(500, "Failed to generate summary");
     }
+    const newPost = await Post.create({ title, content, summary });
+
+    return res.status(201).json(new ApiResponse(200, newPost, "New post created"));
+  } catch (error) {
+    throw new ApiError(409, error?.message || "Failed to create post");
+  }
 });
 
 //3. for Update post-->
 
-const updatePost = asyncHandler(async(req , res)=>{
-    const {id} = req.params;
-    const {title , content} = req.body;
-    try {
-        const updatePost = await Post.findByIdAndUpdate(
-            id , 
-            {title , content},
-            {new : true}
-);
-return res 
-.status(200)
-.json(new ApiResponse(200 , updatePost , "post is updated"))
-
-    } catch (error) {
-        throw new ApiError(409 , error?.message || "failed to update post");
+const updatePost = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const { title, content } = req.body;
+  try {
+    
+    const summary = await generateSummary(content);
+    
+    if (!summary) {
+      throw new ApiError(500, "Failed to generate summary");
     }
+    const updatedPost = await Post.findByIdAndUpdate(
+      id,
+      { title, content, summary },
+      { new: true }
+    );
+
+    return res.status(200).json(new ApiResponse(200, updatedPost, "Post updated"));
+  } catch (error) {
+    throw new ApiError(409, error?.message || "Failed to update post");
+  }
 });
+
 
 //4. for delete post-->
 
@@ -69,7 +75,7 @@ const deletePost = asyncHandler(async (req, res) => {
   }
 });
   
-
+//5--->for get single post
 const getPost = asyncHandler(async(req , res)=>{
   const { id } = req.params;
   try {
