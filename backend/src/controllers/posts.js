@@ -1,5 +1,5 @@
 import Post from "../models/post.js";
-import { generateSummary } from "../utils/ai.js";
+import { generateSummary } from "../utils/gemini-ai.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/apiError.js";
 import { ApiResponse } from "../utils/apiResponce.js";
