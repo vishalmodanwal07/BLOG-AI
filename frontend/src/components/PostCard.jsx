@@ -1,4 +1,7 @@
 import React from 'react';
+import {  toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // CSS for toast styling
+
 
 function PageCard({ title, content, onEdit, onDelete, loading, error }) {
   if (loading) {

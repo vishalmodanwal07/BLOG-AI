@@ -61,6 +61,8 @@ const updatePost = asyncHandler(async (req, res) => {
 
 //4. for delete post-->
 
+//4. for delete post-->
+
 const deletePost = asyncHandler(async (req, res) => {
   const { id } = req.params;
   try {
@@ -75,7 +77,7 @@ const deletePost = asyncHandler(async (req, res) => {
   }
 });
   
-//5--->for get single post
+
 const getPost = asyncHandler(async(req , res)=>{
   const { id } = req.params;
   try {
@@ -89,6 +91,7 @@ const getPost = asyncHandler(async(req , res)=>{
     res.status(500).json({ message: 'Server error' });
   }
 });
+
 
 
 export {

@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import BlogCard from "../components/BlogCard";
 import Spinner from "../components/Spinner";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // CSS for toast styling
+
 
 
 function Home() {

@@ -2,6 +2,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // CSS for toast styling
+
 
 const BlogCard = ({ title, content, summary, postId, onDelete }) => {
   const navigate = useNavigate();
@@ -9,6 +12,7 @@ const BlogCard = ({ title, content, summary, postId, onDelete }) => {
   // For Edit Post
   const handleEdit = () => {
     navigate(`/edit/${postId}`); 
+    
   };
 
   // For Delete Post
@@ -17,7 +21,7 @@ const BlogCard = ({ title, content, summary, postId, onDelete }) => {
     if (confirmDelete) {
       try {
         await axios.delete(`/api/posts/${postId}`);
-        alert('Post deleted successfully!');
+        toast.success("Post deleted");
         onDelete(postId); // Call the callback function to update parent state
       } catch (error) {
         console.error('Error deleting the post:', error);
