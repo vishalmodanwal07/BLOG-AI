@@ -29,7 +29,7 @@ function PostPage() {
   const handleDelete = async () => {
     try {
       await axios.delete(`/api/posts/${id}`);
-      navigate('/'); // Redirect to the home page after deletion
+      navigate('/'); 
     } catch (err) {
       console.error('Error deleting post:', err);
     }

@@ -13,7 +13,6 @@ function CreatePage() {
     navigate('/');
   };
 
-  // Navigate to the Home page when the Home button is clicked
   const goHome = () => {
     navigate('/');
   };
@@ -23,7 +22,6 @@ function CreatePage() {
       <div className="max-w-2xl w-full bg-white p-8 rounded-xl shadow-2xl">
         <h1 className="text-4xl text-blue-700 font-extrabold text-center mb-8">Create Your Blog</h1>
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Title Input */}
           <div>
             <label htmlFor="title" className="block text-xl font-medium text-gray-700">Title</label>
             <input
@@ -36,8 +34,6 @@ function CreatePage() {
               required
             />
           </div>
-
-          {/* Content Textarea */}
           <div>
             <label htmlFor="content" className="block text-xl font-medium text-gray-700">Content</label>
             <textarea
@@ -50,18 +46,13 @@ function CreatePage() {
               required
             />
           </div>
-
-          {/* Button Container */}
           <div className="flex justify-between space-x-4">
-            {/* Create Post Button */}
             <button
               type="submit"
               className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-bold rounded-xl shadow-md hover:from-blue-600 hover:to-indigo-600 transition duration-300 ease-in-out"
             >
               Create Post
             </button>
-
-            {/* Home Button */}
             <button
               type="button"
               onClick={goHome}

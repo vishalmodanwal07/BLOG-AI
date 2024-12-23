@@ -32,7 +32,6 @@ function EditPage() {
       <div className="max-w-2xl w-full bg-white p-8 rounded-xl shadow-2xl">
         <h1 className="text-4xl font-extrabold text-center text-blue-700 mb-8">Edit Post</h1>
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Title Input */}
           <div>
             <label htmlFor="title" className="block text-xl font-medium text-gray-700">Title</label>
             <input
@@ -45,8 +44,6 @@ function EditPage() {
               required
             />
           </div>
-
-          {/* Content Textarea */}
           <div>
             <label htmlFor="content" className="block text-xl font-medium text-gray-700">Content</label>
             <textarea
@@ -59,18 +56,13 @@ function EditPage() {
               required
             />
           </div>
-
-          {/* Button Container */}
           <div className="flex justify-between space-x-4">
-            {/* Update Button */}
             <button
               type="submit"
               className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-bold rounded-xl shadow-md hover:from-blue-600 hover:to-indigo-600 transition duration-300 ease-in-out"
             >
               Update Post
             </button>
-
-            {/* Home Button */}
             <button
               type="button"
               onClick={goHome}

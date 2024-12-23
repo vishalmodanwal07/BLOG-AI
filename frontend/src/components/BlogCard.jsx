@@ -6,12 +6,12 @@ import axios from 'axios';
 const BlogCard = ({ title, content, summary, postId, onDelete }) => {
   const navigate = useNavigate();
 
-  // Handle Edit Post
+  // For Edit Post
   const handleEdit = () => {
-    navigate(`/edit/${postId}`); // Navigate to the edit page with postId
+    navigate(`/edit/${postId}`); 
   };
 
-  // Handle Delete Post
+  // For Delete Post
   const handleDelete = async () => {
     const confirmDelete = window.confirm('Are you sure you want to delete this post?');
     if (confirmDelete) {
@@ -26,7 +26,7 @@ const BlogCard = ({ title, content, summary, postId, onDelete }) => {
     }
   };
 
-  // Handle Read More
+  //  Read More Button
   const handleReadMore = () => {
     navigate(`/post/${postId}`);
   };

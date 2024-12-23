@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import BlogCard from "../components/BlogCard";
+import Spinner from "../components/Spinner";
 
 
 function Home() {
@@ -40,7 +41,7 @@ function Home() {
         <h1 className="text-4xl font-extrabold text-center text-blue-700 mb-8">Blog Posts</h1>
 
         {loading ? (
-          <p>Loading...</p>
+          <Spinner/>
         ) : posts.length === 0 ? (
           <p className="text-gray-500 text-lg text-center">No posts available.</p>
         ) : (
@@ -52,7 +53,7 @@ function Home() {
                 title={post.title}
                 content={post.content}
                 summary={post.summary}
-                onDelete={handleDeletePost} // Pass the callback
+                onDelete={handleDeletePost} 
               />
             ))}
           </div>
