@@ -36,6 +36,7 @@ function Home() {
 
   const handleDeletePost = (deletedPostId) => {
     setPosts((prevPosts) => prevPosts.filter((post) => post._id !== deletedPostId));
+    
   };
 
   return (

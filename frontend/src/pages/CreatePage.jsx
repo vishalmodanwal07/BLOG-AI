@@ -14,6 +14,7 @@ function CreatePage() {
     e.preventDefault();
     await axios.post('/api/posts', { title, content });
     navigate('/');
+    toast.success("new Blog added");
   };
 
   const goHome = () => {

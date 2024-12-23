@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import PageCard from '../components/PostCard';
+import { toast } from 'react-toastify';
 
 function PostPage() {
   const { id } = useParams();
@@ -30,6 +31,7 @@ function PostPage() {
     try {
       await axios.delete(`/api/posts/${id}`);
       navigate('/'); 
+      toast.success("Post Deleted");
     } catch (err) {
       console.error('Error deleting post:', err);
     }

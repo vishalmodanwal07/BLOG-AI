@@ -23,6 +23,7 @@ function EditPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios.put(`/api/posts/${id}`, { title, content });
+    toast.success("Post Updated");
     navigate('/');
   };
 
